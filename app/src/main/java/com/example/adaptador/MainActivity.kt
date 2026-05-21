@@ -2,6 +2,7 @@ package com.example.adaptador
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,17 +26,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.rvwNews.layoutManager = LinearLayoutManager(this)
-        binding.rvwNews.adapter = NoticiaAdaptador(getNews())
+        binding.rvwNews.adapter = NoticiaAdaptador(getNews(),
+            onNoticiaClicked = {noticia -> Toast.makeText(this,
+                "clic en ${noticia.title}",
+                Toast.LENGTH_SHORT).show() })
     }
 
     fun getNews(): List<Noticia> {
-        val noticias = listOf(Noticia("Titulo 1", "Descripción 1"),
-            Noticia("Titulo 1", "Descripción 1"),
-            Noticia("Titulo 2", "Descripción 2"),
-            Noticia("Titulo 3", "Descripción 3"),
-            Noticia("Titulo 4", "Descripción 4"),
-            Noticia("Titulo 5", "Descripción 5")
-            )
+
+        val noticias = mutableListOf<Noticia>()
+
+        for (i in 1..50) {
+            noticias.add(Noticia("Titulo $1", "Descripcion $1"))
+        }
+
         return noticias
     }
 }
+
